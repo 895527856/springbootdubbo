@@ -1,0 +1,31 @@
+spring:
+  dubbo:
+    consumer:
+      check: false
+    application:
+      name: consumer
+      id: consumer
+    registry:
+      #address: zookeeper://127.0.0.1:2181
+      address: zookeeper://192.168.6.129:2181
+      id: registry-2
+    protocol:
+      name: dubbo
+      port: 20889
+
+    scan:
+      base-packages: com.example.consumer.controller
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 2
+    maxIdle: 400
+    maxTotal: 6000
+    maxWaitMillis: 1000
+    blockWhenExhausted: true
+    testOnBorrow: true
+    timeout: 100000
+server:
+  port: 8889
+

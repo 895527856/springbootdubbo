@@ -1,0 +1,68 @@
+spring:
+  dubbo:
+    application:
+      name: provider
+      id: provider
+    registry:
+      protocol: zookeeper
+      #address: zookeeper://127.0.0.1:2181
+      address: zookeeper://192.168.6.129:2181//,192.168.6.130:2181
+      id: registry-1
+    protocol:
+      name: dubbo
+      port: 20880
+      id: dubbo
+      status: server
+    scan:
+      base-package: com.example.provider.service.impl
+    thymeleaf:
+      cache: false
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 2
+    maxIdle: 400
+    maxTotal: 6000
+    maxWaitMillis: 1000
+    blockWhenExhausted: true
+    testOnBorrow: true
+    timeout: 100000
+  activemq:
+    broker-url: tcp://localhost:61616
+    in-memory: true
+    pool:
+      enabled: false
+  data:
+    solr:
+      host: http://127.0.0.1:8983/solr
+server:
+  port: 8888
+mybatis:
+  config-locations: classpath:mybatis/mybatis-config.xml
+  typeAliasesPackage: com.example.provider.dao
+  mapperLocations: classpath:mybatis/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+  returnPageInfo: check
+
+logging:
+  level:
+    org:
+      springframework: WARN
+      spring:
+        springboot:
+          dao: DEBUG
+    com:
+      well:
+        mapper: DEBUG
+  file: logs/spring-boot-logging.log
